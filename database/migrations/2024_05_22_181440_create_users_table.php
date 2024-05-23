@@ -21,7 +21,7 @@ return new class extends Migration
             $table->string('phone', 20)->nullable();
             $table->string('email', 50);
             $table->binary('password');
-            $table->boolean('status');
+            $table->string('status', 10)->default('active');
             $table->timestamps();
     
             $table->foreign('role_id')->references('id')->on('roles');

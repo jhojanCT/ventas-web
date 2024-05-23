@@ -9,7 +9,7 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    public function up()
+    public function up(): void
     {
         Schema::create('entries', function (Blueprint $table) {
             $table->increments('id');
@@ -24,11 +24,10 @@ return new class extends Migration
             $table->string('status', 20);
             $table->timestamps();
     
-            $table->foreign('supplier_id')->references('id')->on('persons');
+            $table->foreign('supplier_id')->references('id')->on('Persons');
             $table->foreign('user_id')->references('id')->on('users');
         });
     }
-    
 
     /**
      * Reverse the migrations.

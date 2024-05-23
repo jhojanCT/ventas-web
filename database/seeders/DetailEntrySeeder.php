@@ -2,21 +2,33 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
-
+use App\Models\DetailEntry;
 
 class DetailEntrySeeder extends Seeder
 {
     /**
      * Run the database seeds.
+     *
+     * @return void
      */
-    public function run(): void
+    public function run()
     {
-        DB::table('detail_entries')->insert([
-            ['entry_id' => 1, 'article_id' => 1, 'quantity' => 5, 'price' => 1500.00],
-            ['entry_id' => 2, 'article_id' => 2, 'quantity' => 10, 'price' => 100.00],
+        // Crear datos de ejemplo para DetailEntry
+        DetailEntry::create([
+            'entry_id' => 1,
+            'article_id' => 1,
+            'quantity' => 5,
+            'price' => 10.99,
         ]);
+
+        DetailEntry::create([
+            'entry_id' => 2,
+            'article_id' => 2,
+            'quantity' => 3,
+            'price' => 15.99,
+        ]);
+
+        // Puedes continuar agregando más datos aquí según sea necesario
     }
 }

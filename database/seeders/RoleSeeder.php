@@ -2,18 +2,30 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
-
+use App\Models\Role;
 
 class RoleSeeder extends Seeder
 {
-    public function run(): void
+    /**
+     * Run the database seeds.
+     *
+     * @return void
+     */
+    public function run()
     {
-        DB::table('roles')->insert([
-            ['name' => 'Admin', 'description' => 'Administrator role', 'status' => true],
-            ['name' => 'User', 'description' => 'Regular user role', 'status' => true],
+        Role::create([
+            'name' => 'Admin',
+            'description' => 'Administrator Role',
+            'status' => 1, // 1 para representar activo
         ]);
+
+        Role::create([
+            'name' => 'User',
+            'description' => 'Regular User Role',
+            'status' => 1, // 1 para representar activo
+        ]);
+
+        // Puedes agregar más roles si es necesario
     }
 }

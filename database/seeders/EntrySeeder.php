@@ -2,21 +2,43 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
-
+use App\Models\Entry;
+use Carbon\Carbon;
 
 class EntrySeeder extends Seeder
 {
     /**
      * Run the database seeds.
+     *
+     * @return void
      */
-    public function run(): void
+    public function run()
     {
-        DB::table('entries')->insert([
-            ['supplier_id' => 1, 'user_id' => 1, 'voucher_type' => 'Invoice', 'voucher_series' => '001', 'voucher_number' => '0001', 'date_time' => now(), 'tax' => 18.00, 'total' => 1500.00, 'status' => 'Completed'],
-            ['supplier_id' => 1, 'user_id' => 1, 'voucher_type' => 'Invoice', 'voucher_series' => '001', 'voucher_number' => '0002', 'date_time' => now(), 'tax' => 18.00, 'total' => 1000.00, 'status' => 'Completed'],
+        Entry::create([
+            'supplier_id' => 1, // Asegúrate de que este proveedor exista
+            'user_id' => 1, // Asegúrate de que este usuario exista
+            'voucher_type' => 'Receipt',
+            'voucher_series' => 'B002',
+            'voucher_number' => '00012345',
+            'date_time' => Carbon::now(),
+            'tax' => 18.00,
+            'total' => 100.00,
+            'status' => 'completed',
         ]);
+
+        Entry::create([
+            'supplier_id' => 2, // Asegúrate de que este proveedor exista
+            'user_id' => 1, // Asegúrate de que este usuario exista
+            'voucher_type' => 'Invoice',
+            'voucher_series' => 'A001',
+            'voucher_number' => '00067890',
+            'date_time' => Carbon::now(),
+            'tax' => 18.00,
+            'total' => 200.00,
+            'status' => 'pending',
+        ]);
+
+        // Puedes añadir más entradas si es necesario
     }
 }

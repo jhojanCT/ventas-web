@@ -20,7 +20,7 @@ return new class extends Migration
             $table->integer('stock');
             $table->string('description', 255)->nullable();
             $table->string('image', 20)->nullable();
-            $table->boolean('status');
+            $table->string('status', 10)->default('active');
             $table->timestamps();
     
             $table->foreign('category_id')->references('id')->on('categories');

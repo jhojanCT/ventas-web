@@ -15,7 +15,7 @@ return new class extends Migration
             $table->increments('id');
             $table->string('name', 30);
             $table->string('description', 256)->nullable();
-            $table->boolean('status');
+            $table->string('status', 10)->default('active');
             $table->timestamps();
         });
     }

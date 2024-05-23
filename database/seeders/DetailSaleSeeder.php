@@ -2,21 +2,34 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
-
+use App\Models\DetailSale;
 
 class DetailSaleSeeder extends Seeder
 {
     /**
      * Run the database seeds.
+     *
+     * @return void
      */
-    public function run(): void
+    public function run()
     {
-        DB::table('detail_sales')->insert([
-            ['sale_id' => 1, 'article_id' => 1, 'quantity' => 1, 'price' => 1500.00, 'discount' => 0.00],
-            ['sale_id' => 2, 'article_id' => 2, 'quantity' => 5, 'price' => 100.00, 'discount' => 50.00],
+        DetailSale::create([
+            'sale_id' => 1, // Asegúrate de que esta venta exista
+            'article_id' => 1, // Asegúrate de que este artículo exista
+            'quantity' => 2,
+            'price' => 50.00,
+            'discount' => 0.00,
         ]);
+
+        DetailSale::create([
+            'sale_id' => 2, // Asegúrate de que esta venta exista
+            'article_id' => 2, // Asegúrate de que este artículo exista
+            'quantity' => 1,
+            'price' => 100.00,
+            'discount' => 10.00,
+        ]);
+
+        // Puedes añadir más detalles de ventas si es necesario
     }
 }

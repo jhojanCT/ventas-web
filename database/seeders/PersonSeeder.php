@@ -2,19 +2,38 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
-
+use App\Models\Person;
 
 class PersonSeeder extends Seeder
 {
-    public function run(): void
+    /**
+     * Run the database seeds.
+     *
+     * @return void
+     */
+    public function run()
     {
-        DB::table('persons')->insert([
-            ['person_type' => 'Supplier', 'name' => 'John Doe', 'document_type' => 'DNI', 'document_number' => '12345678', 'address' => '123 Main St', 'phone' => '555-5555', 'email' => 'john@example.com'],
-            ['person_type' => 'Client', 'name' => 'Jane Smith', 'document_type' => 'DNI', 'document_number' => '87654321', 'address' => '456 Secondary St', 'phone' => '555-1234', 'email' => 'jane@example.com'],
+        Person::create([
+            'person_type' => 'Supplier',
+            'name' => 'Supplier Company',
+            'document_type' => 'RUC',
+            'document_number' => '12345678901',
+            'address' => 'Supplier Address',
+            'phone' => '555-555-5555',
+            'email' => 'supplier@example.com',
         ]);
+
+        Person::create([
+            'person_type' => 'Client',
+            'name' => 'Client Company',
+            'document_type' => 'RUC',
+            'document_number' => '98765432109',
+            'address' => 'Client Address',
+            'phone' => '555-555-5556',
+            'email' => 'client@example.com',
+        ]);
+
+        // Puedes añadir más personas si es necesario
     }
 }
-
