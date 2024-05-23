@@ -34,6 +34,6 @@ class PersonSeeder extends Seeder
             'email' => 'client@example.com',
         ]);
 
-        // Puedes añadir más personas si es necesario
+       
     }
 }

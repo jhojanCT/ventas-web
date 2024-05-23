@@ -15,7 +15,7 @@ class ArticleSeeder extends Seeder
     public function run()
     {
         Article::create([
-            'category_id' => 1, // Asegúrate de que esta categoría exista
+            'category_id' => 1, 
             'code' => 'ART001',
             'name' => 'Smartphone',
             'sale_price' => 500.00,
@@ -26,7 +26,7 @@ class ArticleSeeder extends Seeder
         ]);
 
         Article::create([
-            'category_id' => 2, // Asegúrate de que esta categoría exista
+            'category_id' => 2, 
             'code' => 'ART002',
             'name' => 'T-shirt',
             'sale_price' => 20.00,
@@ -36,6 +36,6 @@ class ArticleSeeder extends Seeder
             'status' => 'active',
         ]);
 
-        // Puedes añadir más artículos si es necesario
+        
     }
 }

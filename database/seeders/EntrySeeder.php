@@ -16,8 +16,8 @@ class EntrySeeder extends Seeder
     public function run()
     {
         Entry::create([
-            'supplier_id' => 1, // Asegúrate de que este proveedor exista
-            'user_id' => 1, // Asegúrate de que este usuario exista
+            'supplier_id' => 1, 
+            'user_id' => 1, 
             'voucher_type' => 'Receipt',
             'voucher_series' => 'B002',
             'voucher_number' => '00012345',
@@ -28,8 +28,8 @@ class EntrySeeder extends Seeder
         ]);
 
         Entry::create([
-            'supplier_id' => 2, // Asegúrate de que este proveedor exista
-            'user_id' => 1, // Asegúrate de que este usuario exista
+            'supplier_id' => 2, 
+            'user_id' => 1, 
             'voucher_type' => 'Invoice',
             'voucher_series' => 'A001',
             'voucher_number' => '00067890',
@@ -39,6 +39,6 @@ class EntrySeeder extends Seeder
             'status' => 'pending',
         ]);
 
-        // Puedes añadir más entradas si es necesario
+       
     }
 }

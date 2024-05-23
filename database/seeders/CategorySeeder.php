@@ -26,6 +26,5 @@ class CategorySeeder extends Seeder
             'status' => 'active',
         ]);
 
-        // Puedes añadir más categorías si es necesario
     }
 }

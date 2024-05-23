@@ -39,6 +39,6 @@ class UserSeeder extends Seeder
             'status' => 'active',
         ]);
 
-        // Puedes añadir más usuarios si es necesario
+       
     }
 }

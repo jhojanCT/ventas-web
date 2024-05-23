@@ -17,15 +17,15 @@ class RoleSeeder extends Seeder
         Role::create([
             'name' => 'Admin',
             'description' => 'Administrator Role',
-            'status' => 1, // 1 para representar activo
+            'status' => 1,
         ]);
 
         Role::create([
             'name' => 'User',
             'description' => 'Regular User Role',
-            'status' => 1, // 1 para representar activo
+            'status' => 1, 
         ]);
 
-        // Puedes agregar más roles si es necesario
+ 
     }
 }

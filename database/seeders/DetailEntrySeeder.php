@@ -14,7 +14,7 @@ class DetailEntrySeeder extends Seeder
      */
     public function run()
     {
-        // Crear datos de ejemplo para DetailEntry
+
         DetailEntry::create([
             'entry_id' => 1,
             'article_id' => 1,
@@ -29,6 +29,6 @@ class DetailEntrySeeder extends Seeder
             'price' => 15.99,
         ]);
 
-        // Puedes continuar agregando más datos aquí según sea necesario
+
     }
 }
