@@ -34,15 +34,15 @@ class DatabaseSeeder extends Seeder
      //       DetailSaleSeeder::class,
      //   ]);
 
-        User::factory(10)->create();
-        Role::factory(10)->create();
-        Category::factory(10)->create();
-        Person::factory(10)->create();
-        Article::factory(10)->create();
-        Entry::factory(10)->create();
-        DetailEntry::factory(10)->create();
-        Sale::factory(10)->create();
-        DetailSale::factory(10)->create();
+       // User::factory(10)->create();
+       // Role::factory(10)->create();
+       // Category::factory(10)->create();
+       // Person::factory(10)->create();
+       // Article::factory(10)->create();
+       // Entry::factory(10)->create();
+       // DetailEntry::factory(10)->create();
+       // Sale::factory(10)->create();
+       // DetailSale::factory(10)->create();
         
         // User::factory(10)->create();
         //$this->call(UserSeeder::class);
