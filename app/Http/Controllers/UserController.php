@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
-use Inertia\Inertia;
 
 class UserController extends Controller
 {
@@ -14,7 +13,7 @@ class UserController extends Controller
     public function index()
     {
         $users = User::all();
-        return Inertia::render('Users/Index', [
+        return view('Users.Index', [
             'users' => $users,
         ]);
     }
@@ -24,7 +23,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        return Inertia::render('Users/Create');
+        return view('Users.Create');
     }
 
     /**
@@ -33,9 +32,15 @@ class UserController extends Controller
     public function store(Request $request)
     {
         $validatedData = $request->validate([
+            'role_id' => 'required|integer',
             'name' => 'required|string|max:45',
+            'document_type' => 'required|string|max:45',
+            'document_number' => 'required|string|max:45|unique:users,document_number',
+            'address' => 'required|string|max:255',
+            'phone' => 'required|string|max:45',
             'email' => 'required|email|max:45|unique:users,email',
             'password' => 'required|string|min:6',
+            'status' => 'required|string|max:45',
         ]);
 
         $validatedData['password'] = bcrypt($validatedData['password']);
@@ -52,7 +57,7 @@ class UserController extends Controller
     public function show(string $id)
     {
         $user = User::findOrFail($id);
-        return Inertia::render('Users/Show', [
+        return view('Users.Show', [
             'user' => $user,
         ]);
     }
@@ -63,7 +68,7 @@ class UserController extends Controller
     public function edit(string $id)
     {
         $user = User::findOrFail($id);
-        return Inertia::render('Users/Edit', [
+        return view('Users.Edit', [
             'user' => $user,
         ]);
     }
@@ -74,8 +79,14 @@ class UserController extends Controller
     public function update(Request $request, string $id)
     {
         $validatedData = $request->validate([
+            'role_id' => 'required|integer',
             'name' => 'required|string|max:45',
-            'email' => 'required|email|max:45|unique:users,email,' . $id,
+            'document_type' => 'required|string|max:45',
+            'document_number' => 'required|string|max:45|unique:users,document_number,'.$id,
+            'address' => 'required|string|max:255',
+            'phone' => 'required|string|max:45',
+            'email' => 'required|email|max:45|unique:users,email,'.$id,
+            'status' => 'required|string|max:45',
         ]);
 
         $user = User::findOrFail($id);
@@ -97,3 +108,4 @@ class UserController extends Controller
                          ->with('success', 'User deleted successfully');
     }
 }
+

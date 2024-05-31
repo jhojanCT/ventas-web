@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Role;
 use Illuminate\Http\Request;
-use Inertia\Inertia;
 
 class RoleController extends Controller
 {
@@ -14,9 +13,7 @@ class RoleController extends Controller
     public function index()
     {
         $roles = Role::all();
-        return Inertia::render('Roles/Index', [
-            'roles' => $roles,
-        ]);
+        return view('Roles.Index', ['roles' => $roles]);
     }
 
     /**
@@ -24,7 +21,7 @@ class RoleController extends Controller
      */
     public function create()
     {
-        return Inertia::render('Roles/Create');
+        return view('Roles.Create');
     }
 
     /**
@@ -35,6 +32,7 @@ class RoleController extends Controller
         $validatedData = $request->validate([
             'name' => 'required|string|max:255|unique:roles,name',
             'description' => 'nullable|string|max:255',
+            'status' => 'required|string|max:45',
         ]);
 
         $role = Role::create($validatedData);
@@ -49,9 +47,7 @@ class RoleController extends Controller
     public function show(string $id)
     {
         $role = Role::findOrFail($id);
-        return Inertia::render('Roles/Show', [
-            'role' => $role,
-        ]);
+        return view('Roles.Show', ['role' => $role]);
     }
 
     /**
@@ -60,9 +56,7 @@ class RoleController extends Controller
     public function edit(string $id)
     {
         $role = Role::findOrFail($id);
-        return Inertia::render('Roles/Edit', [
-            'role' => $role,
-        ]);
+        return view('Roles.Edit', ['role' => $role]);
     }
 
     /**
@@ -73,6 +67,7 @@ class RoleController extends Controller
         $validatedData = $request->validate([
             'name' => 'required|string|max:45|unique:roles,name,' . $id,
             'description' => 'nullable|string|max:255',
+            'status' => 'required|string|max:45',
         ]);
 
         $role = Role::findOrFail($id);

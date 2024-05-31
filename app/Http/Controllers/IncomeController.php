@@ -2,21 +2,18 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Income;
+use App\Models\Role;
 use Illuminate\Http\Request;
-use Inertia\Inertia;
 
-class IncomeController extends Controller
+class RoleController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $incomes = Income::all();
-        return Inertia::render('Incomes/Index', [
-            'incomes' => $incomes,
-        ]);
+        $roles = Role::all();
+        return view('Roles.Index', ['roles' => $roles]);
     }
 
     /**
@@ -24,7 +21,7 @@ class IncomeController extends Controller
      */
     public function create()
     {
-        return Inertia::render('Incomes/Create');
+        return view('Roles.Create');
     }
 
     /**
@@ -33,14 +30,15 @@ class IncomeController extends Controller
     public function store(Request $request)
     {
         $validatedData = $request->validate([
-            'field1' => 'required|string',
-            'field2' => 'required|numeric',
+            'name' => 'required|string|max:255|unique:roles,name',
+            'description' => 'nullable|string|max:255',
+            'status' => 'required|string|max:45',
         ]);
 
-        $income = Income::create($validatedData);
+        $role = Role::create($validatedData);
 
-        return redirect()->route('incomes.index')
-                         ->with('success', 'Income created successfully');
+        return redirect()->route('roles.index')
+                         ->with('success', 'Role created successfully');
     }
 
     /**
@@ -48,10 +46,8 @@ class IncomeController extends Controller
      */
     public function show(string $id)
     {
-        $income = Income::findOrFail($id);
-        return Inertia::render('Incomes/Show', [
-            'income' => $income,
-        ]);
+        $role = Role::findOrFail($id);
+        return view('Roles.Show', ['role' => $role]);
     }
 
     /**
@@ -59,10 +55,8 @@ class IncomeController extends Controller
      */
     public function edit(string $id)
     {
-        $income = Income::findOrFail($id);
-        return Inertia::render('Incomes/Edit', [
-            'income' => $income,
-        ]);
+        $role = Role::findOrFail($id);
+        return view('Roles.Edit', ['role' => $role]);
     }
 
     /**
@@ -71,15 +65,16 @@ class IncomeController extends Controller
     public function update(Request $request, string $id)
     {
         $validatedData = $request->validate([
-            'field1' => 'required|string',
-            'field2' => 'required|numeric',
+            'name' => 'required|string|max:45|unique:roles,name,' . $id,
+            'description' => 'nullable|string|max:255',
+            'status' => 'required|string|max:45',
         ]);
 
-        $income = Income::findOrFail($id);
-        $income->update($validatedData);
+        $role = Role::findOrFail($id);
+        $role->update($validatedData);
 
-        return redirect()->route('incomes.index')
-                         ->with('success', 'Income updated successfully');
+        return redirect()->route('roles.index')
+                         ->with('success', 'Role updated successfully');
     }
 
     /**
@@ -87,11 +82,10 @@ class IncomeController extends Controller
      */
     public function destroy(string $id)
     {
-        $income = Income::findOrFail($id);
-        $income->delete();
+        $role = Role::findOrFail($id);
+        $role->delete();
 
-        return redirect()->route('incomes.index')
-                         ->with('success', 'Income deleted successfully');
+        return redirect()->route('roles.index')
+                         ->with('success', 'Role deleted successfully');
     }
 }
-

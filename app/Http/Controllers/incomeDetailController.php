@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\IncomeDetail;
 use Illuminate\Http\Request;
-use Inertia\Inertia;
 
 class IncomeDetailController extends Controller
 {
@@ -14,7 +13,7 @@ class IncomeDetailController extends Controller
     public function index()
     {
         $incomeDetails = IncomeDetail::all();
-        return Inertia::render('IncomeDetails/Index', [
+        return view('IncomeDetails.Index', [
             'incomeDetails' => $incomeDetails,
         ]);
     }
@@ -24,7 +23,7 @@ class IncomeDetailController extends Controller
      */
     public function create()
     {
-        return Inertia::render('IncomeDetails/Create');
+        return view('IncomeDetails.Create');
     }
 
     /**
@@ -33,8 +32,10 @@ class IncomeDetailController extends Controller
     public function store(Request $request)
     {
         $validatedData = $request->validate([
-            'field1' => 'required|string',
-            'field2' => 'required|numeric',
+            'entry_id' => 'required|integer',
+            'article_id' => 'required|integer',
+            'quantity' => 'required|integer',
+            'price' => 'required|numeric',
         ]);
 
         $incomeDetail = IncomeDetail::create($validatedData);
@@ -49,7 +50,7 @@ class IncomeDetailController extends Controller
     public function show(string $id)
     {
         $incomeDetail = IncomeDetail::findOrFail($id);
-        return Inertia::render('IncomeDetails/Show', [
+        return view('IncomeDetails.Show', [
             'incomeDetail' => $incomeDetail,
         ]);
     }
@@ -60,7 +61,7 @@ class IncomeDetailController extends Controller
     public function edit(string $id)
     {
         $incomeDetail = IncomeDetail::findOrFail($id);
-        return Inertia::render('IncomeDetails/Edit', [
+        return view('IncomeDetails.Edit', [
             'incomeDetail' => $incomeDetail,
         ]);
     }
@@ -71,8 +72,10 @@ class IncomeDetailController extends Controller
     public function update(Request $request, string $id)
     {
         $validatedData = $request->validate([
-            'field1' => 'required|string',
-            'field2' => 'required|numeric',
+            'entry_id' => 'required|integer',
+            'article_id' => 'required|integer',
+            'quantity' => 'required|integer',
+            'price' => 'required|numeric',
         ]);
 
         $incomeDetail = IncomeDetail::findOrFail($id);
