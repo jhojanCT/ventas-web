@@ -22,6 +22,7 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
 
+<<<<<<< HEAD
        $this->call([
            RoleSeeder::class,
            CategorySeeder::class,
@@ -33,16 +34,29 @@ class DatabaseSeeder extends Seeder
            SaleSeeder::class,
            DetailSaleSeeder::class,
        ]);
+=======
+        $this->call([
+            RoleSeeder::class,
+            CategorySeeder::class,
+            PersonSeeder::class,
+            UserSeeder::class,
+            ArticleSeeder::class,
+            EntrySeeder::class,
+            DetailEntrySeeder::class,
+            SaleSeeder::class,
+            DetailSaleSeeder::class,
+        ]);
+>>>>>>> 603f77c (actualizacion)
 
-       // User::factory(10)->create();
-       // Role::factory(10)->create();
-       // Category::factory(10)->create();
-       // Person::factory(10)->create();
-       // Article::factory(10)->create();
-       // Entry::factory(10)->create();
-       // DetailEntry::factory(10)->create();
-       // Sale::factory(10)->create();
-       // DetailSale::factory(10)->create();
+        User::factory(10)->create();
+        Role::factory(10)->create();
+        Category::factory(10)->create();
+        Person::factory(10)->create();
+        Article::factory(10)->create();
+        Entry::factory(10)->create();
+        DetailEntry::factory(10)->create();
+        Sale::factory(10)->create();
+        DetailSale::factory(10)->create();
         
         // User::factory(10)->create();
         //$this->call(UserSeeder::class);
