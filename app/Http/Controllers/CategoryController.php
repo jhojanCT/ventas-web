@@ -4,12 +4,14 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Category;
+use Exception;
 
 class CategoryController extends Controller
 {
     //
     public function index()
     {
+        // dd(csrf_token());
         $categories = Category::all();
         return view('categories.index', compact('categories'));
     }
@@ -21,9 +23,22 @@ class CategoryController extends Controller
 
     public function store(Request $request)
     {
+      
+       
         $category = new Category($request->all());
+        // $category->name = $request->name;
+        // $category->description = $request->description;
+        // $category->status = $request->status;
         $category->save();
+       
         return redirect()->route('categories.index');
+       
+      
+       
+       
+       
+
+    //    return  dd($request);
     }
 
     public function show(Category $category)
