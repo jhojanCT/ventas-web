@@ -32,11 +32,15 @@ class Entry extends Model
 
     public function user()
     {
-        return $this->belongsTo(User::class, 'user_id');
+
+        return $this->belongsTo(User::class);
     }
 
     public function detailEntries()
     {
         return $this->hasMany(DetailEntry::class, 'entry_id');
     }
+  
+
+        
 }

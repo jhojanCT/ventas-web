@@ -12,16 +12,16 @@ return new class extends Migration
     public function up()
     {
         Schema::create('detail_sales', function (Blueprint $table) {
-            $table->increments('id');
-            $table->unsignedInteger('sale_id');
-            $table->unsignedInteger('article_id');
+            $table->id();
+            $table->unsignedBigInteger('sale_id');
+            $table->unsignedBigInteger('article_id');
             $table->integer('quantity');
             $table->decimal('price', 11, 2);
             $table->decimal('discount', 11, 2);
             $table->timestamps();
     
-            $table->foreign('sale_id')->references('id')->on('sales');
-            $table->foreign('article_id')->references('id')->on('articles');
+            $table->foreign('sale_id')->references('id')->on('sales')->onDelete('cascade');
+            $table->foreign('article_id')->references('id')->on('articles')->onDelete('cascade');
         });
     }
     

@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Person;
 use Illuminate\Http\Request;
-use Inertia\Inertia;
 
 class PersonController extends Controller
 {
@@ -14,7 +13,7 @@ class PersonController extends Controller
     public function index()
     {
         $persons = Person::all();
-        return Inertia::render('Persons/Index', [
+        return view('Persons.Index', [
             'persons' => $persons,
         ]);
     }
@@ -24,7 +23,7 @@ class PersonController extends Controller
      */
     public function create()
     {
-        return Inertia::render('Persons/Create');
+        return view('Persons.Create');
     }
 
     /**
@@ -33,9 +32,13 @@ class PersonController extends Controller
     public function store(Request $request)
     {
         $validatedData = $request->validate([
-            'name' => 'required|string|max:45',
-            'email' => 'required|email|max:45|unique:persons,email',
-            'age' => 'required|integer|min:0',
+            'person_type' => 'required|string|max:45',
+            'name' => 'required|string|max:255',
+            'document_type' => 'required|string|max:45',
+            'document_number' => 'required|string|max:45',
+            'address' => 'nullable|string|max:255',
+            'phone' => 'nullable|string|max:45',
+            'email' => 'required|email|max:255|unique:persons,email',
         ]);
 
         $person = Person::create($validatedData);
@@ -50,7 +53,7 @@ class PersonController extends Controller
     public function show(string $id)
     {
         $person = Person::findOrFail($id);
-        return Inertia::render('Persons/Show', [
+        return view('Persons.Show', [
             'person' => $person,
         ]);
     }
@@ -61,7 +64,7 @@ class PersonController extends Controller
     public function edit(string $id)
     {
         $person = Person::findOrFail($id);
-        return Inertia::render('Persons/Edit', [
+        return view('Persons.Edit', [
             'person' => $person,
         ]);
     }
@@ -72,9 +75,13 @@ class PersonController extends Controller
     public function update(Request $request, string $id)
     {
         $validatedData = $request->validate([
+            'person_type' => 'required|string|max:45',
             'name' => 'required|string|max:255',
+            'document_type' => 'required|string|max:45',
+            'document_number' => 'required|string|max:45',
+            'address' => 'nullable|string|max:255',
+            'phone' => 'nullable|string|max:45',
             'email' => 'required|email|max:255|unique:persons,email,' . $id,
-            'age' => 'required|integer|min:0',
         ]);
 
         $person = Person::findOrFail($id);
@@ -96,4 +103,3 @@ class PersonController extends Controller
                          ->with('success', 'Person deleted successfully');
     }
 }
-

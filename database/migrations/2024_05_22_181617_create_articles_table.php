@@ -12,8 +12,8 @@ return new class extends Migration
     public function up()
     {
         Schema::create('articles', function (Blueprint $table) {
-            $table->increments('id');
-            $table->unsignedInteger('category_id');
+            $table->id();
+            $table->unsignedBigInteger('category_id');
             $table->string('code', 50);
             $table->string('name', 100);
             $table->decimal('sale_price', 11, 2);
@@ -23,7 +23,7 @@ return new class extends Migration
             $table->string('status', 10)->default('active');
             $table->timestamps();
     
-            $table->foreign('category_id')->references('id')->on('categories');
+            $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
         });
     }
     
