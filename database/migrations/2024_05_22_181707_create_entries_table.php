@@ -12,9 +12,9 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('entries', function (Blueprint $table) {
-            $table->increments('id');
-            $table->unsignedInteger('supplier_id');
-            $table->unsignedInteger('user_id');
+            $table->id();
+            $table->unsignedBigInteger('supplier_id');
+            $table->unsignedBigInteger('user_id');
             $table->string('voucher_type', 20);
             $table->string('voucher_series', 7)->nullable();
             $table->string('voucher_number', 10);
@@ -24,8 +24,8 @@ return new class extends Migration
             $table->string('status', 20);
             $table->timestamps();
     
-            $table->foreign('supplier_id')->references('id')->on('Persons');
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('supplier_id')->references('id')->on('Persons')->onDelete('cascade');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

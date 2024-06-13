@@ -12,8 +12,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('users', function (Blueprint $table) {
-            $table->increments('id');
-            $table->unsignedInteger('role_id');
+            $table->id();
             $table->string('name', 100);
             $table->string('document_type', 20);
             $table->string('document_number', 20);
@@ -22,9 +21,11 @@ return new class extends Migration
             $table->string('email', 50);
             $table->binary('password');
             $table->string('status', 10)->default('active');
+            $table->unsignedBigInteger('role_id');
+            $table->foreign("role_id")->references("id")->on("roles")->onDelete('cascade');
             $table->timestamps();
     
-            $table->foreign('role_id')->references('id')->on('roles');
+            
         });
     }
     

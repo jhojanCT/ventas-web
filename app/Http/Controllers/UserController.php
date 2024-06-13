@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -65,13 +65,15 @@ class UserController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
-    {
-        $user = User::findOrFail($id);
-        return view('Users.Edit', [
-            'user' => $user,
-        ]);
-    }
+
+
+     public function edit(string $id)
+     {
+         $user = User::findOrFail($id);
+         $roles = Role::all();
+         return view('Users.Edit', compact('user', 'roles'));
+     }
+
 
     /**
      * Update the specified resource in storage.
@@ -89,11 +91,13 @@ class UserController extends Controller
             'status' => 'required|string|max:45',
         ]);
 
+        // Depuración: Verificar datos validados
+        dd($validatedData);
+
         $user = User::findOrFail($id);
         $user->update($validatedData);
 
-        return redirect()->route('users.index')
-                         ->with('success', 'User updated successfully');
+        return redirect()->route('users.index')->with('success', '¡Usuario actualizado exitosamente!');
     }
 
     /**

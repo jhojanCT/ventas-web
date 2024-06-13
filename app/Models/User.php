@@ -34,4 +34,9 @@ class User extends Model
     {
         return $this->belongsTo(Role::class);
     }
+    
+    public function entries()
+    {
+        return $this->hasMany(Entry::class)->withTrashed();
+    }
 }
