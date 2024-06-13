@@ -1,35 +1,9 @@
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Roboto', sans-serif;
     background-color: #f0f2f5;
     color: #333;
     margin: 0;
     padding: 0;
-}
-
-.navbar {
-    background-color: #343a40;
-    color: #fff;
-    padding: 10px 0;
-}
-
-.navbar a {
-    color: inherit;
-    text-decoration: none;
-    margin: 0 15px;
-}
-
-.navbar a:hover {
-    text-decoration: underline;
-}
-
-footer {
-    background-color: #222;
-    color: #fff;
-    padding: 20px;
-    text-align: center;
-    position: relative;
-    bottom: 0;
-    width: 100%;
 }
 
 a {
@@ -42,15 +16,15 @@ a {
 }
 
 form {
-    background-color: #f9f9f9;
-    padding: 20px;
+    background-color: #fff;
     border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
 }
 
 form h1 {
     margin-bottom: 20px;
     color: #333;
+    font-size: 1.5rem;
 }
 
 form label {
@@ -64,8 +38,8 @@ form input[type="text"],
 form input[type="email"],
 form select {
     width: calc(100% - 20px);
-    padding: 10px;
-    margin-bottom: 15px;
+    padding: 12px;
+    margin-bottom: 20px;
     border: 1px solid #ccc;
     border-radius: 4px;
     box-sizing: border-box;
@@ -76,6 +50,7 @@ form select {
     -webkit-appearance: none;
     -moz-appearance: none;
     background: url('data:image/svg+xml;utf8,<svg fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="%23333" d="M12 5l-8 8h16l-8-8z"/><path fill="%23999" d="M4 12l4 4 4-4H4z"/></svg>') no-repeat right 10px center/15px auto;
+    padding-right: 30px;
 }
 
 form button[type="submit"] {
@@ -120,10 +95,11 @@ tbody tr:nth-child(even) {
 }
 
 .btn {
-    padding: 6px 12px;
+    padding: 10px 20px;
     border: none;
     cursor: pointer;
     border-radius: 4px;
+    font-size: 1rem;
 }
 
 .btn-primary {
@@ -148,11 +124,56 @@ tbody tr:nth-child(even) {
     background-color: #dc3545;
     color: #fff;
     border: 1px solid #dc3545;
-    font-size: 14px;
-    padding: 4px 8px;
-    margin-right: 5px;
+    font-size: 1rem;
+    padding: 8px 16px;
 }
 
 .btn-danger:hover {
     background-color: #c82333;
+}
+
+/* Estilos para navbar */
+.navbar {
+    background-color: #343a40;
+    color: #fff;
+    padding: 10px 0;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.navbar-brand {
+    font-size: 1.8rem;
+    font-weight: bold;
+    margin-left: 15px;
+}
+
+.navbar-nav {
+    display: flex;
+    align-items: center;
+    list-style: none
+}
+
+.navbar-nav .nav-item {
+    margin-right: 15px;
+}
+
+.navbar-nav .nav-link {
+    color: #fff;
+    font-size: 1.1rem;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.navbar-nav .nav-link:hover {
+    color: #ccc;
+}
+
+/* Estilos para footer */
+footer {
+    background-color: #222;
+    color: #fff;
+    padding: 20px 0;
+    text-align: center;
+    position: relative;
+    bottom: 0;
+    width: 100%;
 }
