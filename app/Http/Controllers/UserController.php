@@ -90,15 +90,13 @@ class UserController extends Controller
             'email' => 'required|email|max:45|unique:users,email,'.$id,
             'status' => 'required|string|max:45',
         ]);
-
-        // Depuración: Verificar datos validados
-        dd($validatedData);
-
+    
         $user = User::findOrFail($id);
         $user->update($validatedData);
-
+    
         return redirect()->route('users.index')->with('success', '¡Usuario actualizado exitosamente!');
     }
+    
 
     /**
      * Remove the specified resource from storage.
