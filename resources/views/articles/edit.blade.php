@@ -8,24 +8,65 @@
                     <div class="card-header">Edit Article</div>
 
                     <div class="card-body">
-                        <form method="POST" action="{{ route('articles.update', $article->id) }}">
+                        @if ($errors->any())
+                            <div class="alert alert-danger">
+                                <ul>
+                                    @foreach ($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        @endif
+
+                        <form method="POST" action="{{ route('articles.update', 1) }}" enctype="multipart/form-data">
                             @csrf
                             @method('PUT')
+                            @php
+                                echo($article);
+                            @endphp
 
                             <div class="form-group row">
                                 <label for="title" class="col-md-4 col-form-label text-md-right">Title</label>
 
                                 <div class="col-md-6">
-                                    <input id="title" type="text" class="form-control" name="title" value="{{ $article->title }}" required autofocus>
+                                    <input id="title" type="text" class="form-control" name="title" value="{{ old('title', $article->name) }}" required autofocus>
                                 </div>
                             </div>
 
+
                             <div class="form-group row">
-                                <label for="content" class="col-md-4 col-form-label text-md-right">Content</label>
+                                <label for="title" class="col-md-4 col-form-label text-md-right">Sale price</label>
 
                                 <div class="col-md-6">
-                                    <textarea id="content" class="form-control" name="content" required>{{ $article->content }}</textarea>
+                                    <input id="title" type="text" class="form-control" name="title" value="{{ old('sale_price', $article->sale_price) }}" required autofocus>
                                 </div>
+                            </div>
+
+
+                            <div class="form-group row">
+                                <label for="title" class="col-md-4 col-form-label text-md-right">stock</label>
+
+                                <div class="col-md-6">
+                                    <input id="title" type="text" class="form-control" name="title" value="{{ old('stock', $article->stock) }}" required autofocus>
+                                </div>
+                            </div>
+
+
+                                <div class="form-group row">
+                                    <label for="content" class="col-md-4 col-form-label text-md-right">Descripcion</label>
+    
+                                    <div class="col-md-6">
+                                        <textarea id="content" class="form-control" name="content" required>{{ old('description', $article->description) }}</textarea>
+                                    </div>
+
+                                    <div class="form-group row">
+                                        <label for="title" class="col-md-4 col-form-label text-md-right">Estado</label>
+        
+                                        <div class="col-md-6">
+                                            <input id="title" type="text" class="form-control" name="title" value="{{ old('status', $article->status) }}" required autofocus>
+                                        </div>
+                                    </div>
+
                             </div>
 
                             <div class="form-group row mb-0">
