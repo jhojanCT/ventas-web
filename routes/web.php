@@ -2,16 +2,14 @@
 
 use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\CategoryController;
-<<<<<<< HEAD
-use App\Http\Controllers\DetailSaleController;
+
 use App\Models\Article;
 use App\Models\Role;
 use GuzzleHttp\Promise\Create;
-=======
 use App\Http\Controllers\DetailEntryController;
+use App\Http\Controllers\DetailSaleController;
 use App\Http\Controllers\EntryController;
 use App\Http\Controllers\SaleController;
->>>>>>> remotes/origin/Dev
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 
@@ -19,7 +17,7 @@ use App\Http\Controllers\UserController;
 
 
 Route::get('/', function () {
-    return ('hola');
+    return ('holaAA');
 });
 
 Route::get('articles', [ArticleController::class, 'index']);
@@ -32,13 +30,6 @@ Route::delete('articles/delete/{articleId}', [ArticleController::class, 'destroy
 
 
 
-Route::get('categories', [CategoryController::class, 'index'])->name('categories.index');
-Route::get('categories/create', [CategoryController::class, 'create']);
-Route::post('categories/store',  [CategoryController::class, 'store'])->name('categories.store');
-
-Route::get('categories/edit/{categoryId}', [CategoryController::class, 'edit'])->name('categories.edit');
-Route::put('categories/update/{categoryId}', [CategoryController::class, 'update']);
-Route::delete('categories/delete/{categoryId}', [CategoryController::class, 'destroy'])->name('categories.delete');;
 
 
 
