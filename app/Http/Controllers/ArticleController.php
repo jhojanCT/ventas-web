@@ -3,12 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
-use App\Models\Article; 
+use App\Models\Article;
+use App\Models\Category; // Asegúrate de importar el modelo Category si aún no lo has hecho
 
 class ArticleController extends Controller
 {
-    //
     public function index()
     {
         $articles = Article::all();
@@ -17,13 +16,33 @@ class ArticleController extends Controller
 
     public function create()
     {
-        return view('articles.create');
+        $categories = Category::all(); // Obtener todas las categorías para el formulario de creación
+        return view('articles.create', compact('categories'));
     }
 
     public function store(Request $request)
     {
-        $article = new Article($request->all());
-        $article->save();
+        $validatedData = $request->validate([
+            'category_id' => 'required|exists:categories,id',
+            'code' => 'required',
+            'name' => 'required',
+            'sale_price' => 'required|numeric',
+            'stock' => 'required|integer',
+            'description' => 'required',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'status' => 'required|boolean',
+        ]);
+
+        // Procesar carga de imagen si se proporciona
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            $imageName = time() . '.' . $image->getClientOriginalExtension();
+            $image->move(public_path('images/articles'), $imageName);
+            $validatedData['image'] = $imageName;
+        }
+
+        Article::create($validatedData);
+
         return redirect()->route('articles.index');
     }
 
@@ -32,14 +51,37 @@ class ArticleController extends Controller
         return view('articles.show', compact('article'));
     }
 
-    public function edit(Article $article)
+    public function edit($id)
     {
-        return view('articles.edit', compact('article'));
+        $categories = Category::all(); // Obtener todas las categorías para el formulario de edición
+        $article = Article::find($id);
+        return view('articles.edit', compact('article', 'categories'));
     }
 
-    public function update(Request $request, Article $article)
+    public function update(Request $request, string $id)
     {
-        $article->update($request->all());
+        $validatedData = $request->validate([
+            'category_id' => 'required|exists:categories,id',
+            'code' => 'required',
+            'name' => 'required',
+            'sale_price' => 'required|numeric',
+            'stock' => 'required|integer',
+            'description' => 'required',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'status' => 'required|boolean',
+        ]);
+
+        // Procesar carga de imagen si se proporciona
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            $imageName = time() . '.' . $image->getClientOriginalExtension();
+            $image->move(public_path('images/articles'), $imageName);
+            $validatedData['image'] = $imageName;
+        }
+
+        $article = Article::find($id);
+        $article->save($request->all());
+
         return redirect()->route('articles.index');
     }
 
