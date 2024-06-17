@@ -34,7 +34,7 @@
                 <td>{{ $article->category ? $article->category->name : 'Sin Categoría' }}</td>
                 <td>{{ $article->sale_price }}</td>
                 <td>{{ $article->stock }}</td>
-                <td>{{ $article->status ? 'Activo' : 'Inactivo' }}</td>
+                <td>{{ $article->status }}</td>
                 <td>
                     <a href="{{ route('articles.edit', $article->id) }}" class="btn btn-warning btn-sm">Editar</a>
                     <form action="{{ route('articles.destroy', $article->id) }}" method="POST" style="display:inline-block;">

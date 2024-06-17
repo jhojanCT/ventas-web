@@ -117,4 +117,7 @@ Route::get('/detail_entries/{id}/edit', [DetailEntryController::class, 'edit'])-
 Route::put('/detail_entries/{id}', [DetailEntryController::class, 'update'])->name('detail_entries.update');
 Route::delete('/detail_entries/{id}', [DetailEntryController::class, 'destroy'])->name('detail_entries.destroy');
 
-//Rutas para
+//Rutas para reportes
+// Route::get('reports/categories', [CategoryController::class, 'reporteCategoriaProductos'])->name('reports.categories.index');
+// Route::get('/reports/categories', [CategoryController::class, 'index'])->name('categories.index');
+Route::get('/reports/categories', [CategoryController::class, 'reporteCategoriaProductos'])->name('reports.categories.index');

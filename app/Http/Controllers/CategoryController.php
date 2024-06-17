@@ -1,5 +1,5 @@
 <?php
-
+// a
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
@@ -62,4 +62,14 @@ class CategoryController extends Controller
         $category->delete();
         return redirect()->route('categories.index');
     }
+
+    //reportes
+    public function reporteCategoriaProductos(){
+        $categories = Category::all();
+        return view('reports.categories.index', compact('categories'));
+    }
 }
+
+
+
+

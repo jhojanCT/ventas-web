@@ -19,40 +19,46 @@
     @csrf
     <div class="form-group">
         <label for="name">Nombre</label>
-        <input type="text" class="form-control" id="name" name="name" required>
+        <input type="text" class="form-control" id="name" name="name" value="{{ old('name') }}" required>
     </div>
     <div class="form-group">
         <label for="category_id">Categoría</label>
         <select class="form-control" id="category_id" name="category_id" required>
             @foreach($categories as $category)
-                <option value="{{ $category->id }}">{{ $category->name }}</option>
+                <option value="{{ $category->id }}" {{ old('category_id') == $category->id ? 'selected' : '' }}>
+                    {{ $category->name }}
+                </option>
             @endforeach
         </select>
     </div>
     <div class="form-group">
         <label for="code">Código</label>
-        <input type="text" class="form-control" id="code" name="code" required>
+        <input type="text" class="form-control" id="code" name="code" value="{{ old('code') }}" required>
     </div>
     <div class="form-group">
         <label for="sale_price">Precio de Venta</label>
-        <input type="number" step="0.01" class="form-control" id="sale_price" name="sale_price" required>
+        <input type="number" step="0.01" class="form-control" id="sale_price" name="sale_price" value="{{ old('sale_price') }}" required>
     </div>
     <div class="form-group">
         <label for="stock">Stock</label>
-        <input type="number" class="form-control" id="stock" name="stock" required>
+        <input type="number" class="form-control" id="stock" name="stock" value="{{ old('stock') }}" required>
     </div>
     <div class="form-group">
         <label for="description">Descripción</label>
-        <textarea class="form-control" id="description" name="description"></textarea>
+        <textarea class="form-control" id="description" name="description">{{ old('description') }}</textarea>
     </div>
     <div class="form-group">
         <label for="image">Imagen</label>
         <input type="file" class="form-control-file" id="image" name="image">
     </div>
-    <div class="form-group form-check">
-        <input type="checkbox" class="form-check-input" id="status" name="status">
-        <label class="form-check-label" for="status">Activo</label>
+    <div class="form-group">
+        <label for="status">Estado</label>
+        <select class="form-control" id="status" name="status">
+            <option value="active" {{ old('status') == 'active' ? 'selected' : '' }}>Activo</option>
+            <option value="inactive" {{ old('status') == 'inactive' ? 'selected' : '' }}>Inactivo</option>
+        </select>
     </div>
+
     <button type="submit" class="btn btn-primary">Guardar</button>
 </form>
 @endsection

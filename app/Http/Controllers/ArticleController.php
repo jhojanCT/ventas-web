@@ -30,7 +30,8 @@ class ArticleController extends Controller
             'stock' => 'required|integer',
             'description' => 'required',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-            'status' => 'required|boolean',
+            'status' => 'nullable',
+            
         ]);
 
         // Procesar carga de imagen si se proporciona
@@ -68,9 +69,9 @@ class ArticleController extends Controller
             'stock' => 'required|integer',
             'description' => 'required',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-            'status' => 'required|boolean',
+            'status' => 'nullable',
         ]);
-
+        // dd($request->all());
         // Procesar carga de imagen si se proporciona
         if ($request->hasFile('image')) {
             $image = $request->file('image');
@@ -80,8 +81,8 @@ class ArticleController extends Controller
         }
 
         $article = Article::find($id);
-        $article->save($request->all());
-
+        $article->update($validatedData);
+        
         return redirect()->route('articles.index');
     }
 
