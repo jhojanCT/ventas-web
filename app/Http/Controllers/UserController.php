@@ -23,7 +23,8 @@ class UserController extends Controller
      */
     public function create()
     {
-        return view('Users.Create');
+        $roles = Role::all();
+        return view('Users.Create', compact('roles'));
     }
 
     /**
@@ -48,7 +49,7 @@ class UserController extends Controller
         $user = User::create($validatedData);
 
         return redirect()->route('users.index')
-                         ->with('success', 'User created successfully');
+                         ->with('success', 'Usuario creado exitosamente');
     }
 
     /**
@@ -65,15 +66,12 @@ class UserController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-
-
-     public function edit(string $id)
-     {
-         $user = User::findOrFail($id);
-         $roles = Role::all();
-         return view('Users.Edit', compact('user', 'roles'));
-     }
-
+    public function edit(string $id)
+    {
+        $user = User::findOrFail($id);
+        $roles = Role::all();
+        return view('Users.Edit', compact('user', 'roles'));
+    }
 
     /**
      * Update the specified resource in storage.
@@ -84,19 +82,18 @@ class UserController extends Controller
             'role_id' => 'required|integer',
             'name' => 'required|string|max:45',
             'document_type' => 'required|string|max:45',
-            'document_number' => 'required|string|max:45|unique:users,document_number,'.$id,
+            'document_number' => 'required|string|max:45|unique:users,document_number,' . $id,
             'address' => 'required|string|max:255',
             'phone' => 'required|string|max:45',
-            'email' => 'required|email|max:45|unique:users,email,'.$id,
+            'email' => 'required|email|max:45|unique:users,email,' . $id,
             'status' => 'required|string|max:45',
         ]);
-    
+
         $user = User::findOrFail($id);
         $user->update($validatedData);
-    
-        return redirect()->route('users.index')->with('success', '¡Usuario actualizado exitosamente!');
+
+        return redirect()->route('users.index')->with('success', 'Usuario actualizado exitosamente');
     }
-    
 
     /**
      * Remove the specified resource from storage.
@@ -107,7 +104,6 @@ class UserController extends Controller
         $user->delete();
 
         return redirect()->route('users.index')
-                         ->with('success', 'User deleted successfully');
+                         ->with('success', 'Usuario eliminado exitosamente');
     }
 }
-

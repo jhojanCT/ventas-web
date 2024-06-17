@@ -23,15 +23,15 @@ class DatabaseSeeder extends Seeder
     {
 
        $this->call([
-           RoleSeeder::class,
-           CategorySeeder::class,
-           PersonSeeder::class,
-           UserSeeder::class,
-           ArticleSeeder::class,
-           EntrySeeder::class,
-           DetailEntrySeeder::class,
-           SaleSeeder::class,
-           DetailSaleSeeder::class,
+        RoleSeeder::class,
+        CategorySeeder::class,
+        PersonSeeder::class,
+        UserSeeder::class,
+        ArticleSeeder::class,
+        EntrySeeder::class,
+        DetailEntrySeeder::class,
+        SaleSeeder::class,
+        DetailSaleSeeder::class,
        ]);
 
        // User::factory(10)->create();

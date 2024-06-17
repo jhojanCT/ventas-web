@@ -17,12 +17,25 @@
                     <a class="nav-link" href="{{ route('articles.index') }}">Artículos</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('users.index') }}">usuarios</a>
+                    <a class="nav-link" href="{{ route('users.index') }}">Usuarios</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('sales.index') }}">Ventas</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('detail-sales.index') }}">Detalles Ventas</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('entries.index') }}">Entradas</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('detailEntries.index') }}">Detalles Entradas</a>
+                </li>
+
 
             </ul>
 
-
+            
             <ul class="navbar-nav ml-auto">
 
             </ul>

@@ -5,6 +5,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\DetailEntryController;
 use App\Http\Controllers\EntryController;
 use App\Http\Controllers\SaleController;
+use App\Http\Controllers\DetailSaleController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 
@@ -29,29 +30,41 @@ Route::delete('/users/{id}', [UserController::class, 'destroy'])->name('users.de
 // Rutas para ventas
 Route::get('/sales', [SaleController::class, 'index'])->name('sales.index');
 Route::get('/sales/create', [SaleController::class, 'create'])->name('sales.create');
-Route::post('/sales', [UserController::class, 'store'])->name('sales.store');
-Route::get('/sales/{id}', [UserController::class, 'show'])->name('sales.show');
-Route::get('/sales/{id}/edit', [UserController::class, 'edit'])->name('sales.edit');
-Route::put('/sales/{id}', [UserController::class, 'update'])->name('sales.update');
-Route::delete('/sales/{id}', [UserController::class, 'destroy'])->name('sales.destroy');
+Route::post('/sales', [SaleController::class, 'store'])->name('sales.store');
+Route::get('/sales/{sale}', [SaleController::class, 'show'])->name('sales.show');
+Route::get('/sales/{sale}/edit', [SaleController::class, 'edit'])->name('sales.edit');
+Route::put('/sales/{sale}', [SaleController::class, 'update'])->name('sales.update');
+Route::delete('/sales/{sale}', [SaleController::class, 'destroy'])->name('sales.destroy');
 
-//Rutas para categorias
+// Rutas para detalles de venta
+Route::get('/detail-sales', [DetailSaleController::class, 'index'])->name('detail-sales.index');
+Route::get('/detail-sales/create', [DetailSaleController::class, 'create'])->name('detail-sales.create');
+Route::post('/detail-sales', [DetailSaleController::class, 'store'])->name('detail-sales.store');
+Route::get('/detail-sales/{detailSale}', [DetailSaleController::class, 'show'])->name('detail-sales.show');
+Route::get('/detail-sales/{detailSale}/edit', [DetailSaleController::class, 'edit'])->name('detail-sales.edit');
+Route::put('/detail-sales/{detailSale}', [DetailSaleController::class, 'update'])->name('detail-sales.update');
+Route::delete('/detail-sales/{detailSale}', [DetailSaleController::class, 'destroy'])->name('detail-sales.destroy');
+
+
+// Rutas para categorías
 Route::get('/categories', [CategoryController::class, 'index'])->name('categories.index');
 Route::get('/categories/create', [CategoryController::class, 'create'])->name('categories.create');
 Route::post('/categories', [CategoryController::class, 'store'])->name('categories.store');
-Route::get('/categories/{id}', [CategoryController::class, 'show'])->name('categories.show');
-Route::get('/categories/{id}/edit', [CategoryController::class, 'edit'])->name('categories.edit');
-Route::put('/categories/{id}', [CategoryController::class, 'update'])->name('categories.update');
-Route::delete('/categories/{id}', [CategoryController::class, 'destroy'])->name('categories.destroy');
+Route::get('/categories/{category}', [CategoryController::class, 'show'])->name('categories.show');
+Route::get('/categories/{category}/edit', [CategoryController::class, 'edit'])->name('categories.edit');
+Route::put('/categories/{category}', [CategoryController::class, 'update'])->name('categories.update');
+Route::delete('/categories/{category}', [CategoryController::class, 'destroy'])->name('categories.destroy');
 
-//Rutas para articulos
+
+// Rutas para artículos
 Route::get('/articles', [ArticleController::class, 'index'])->name('articles.index');
 Route::get('/articles/create', [ArticleController::class, 'create'])->name('articles.create');
 Route::post('/articles', [ArticleController::class, 'store'])->name('articles.store');
-Route::get('/articles/{id}', [ArticleController::class, 'show'])->name('articles.show');
-Route::get('/articles/{id}/edit', [ArticleController::class, 'edit'])->name('articles.edit');
-Route::put('/articles/{id}', [ArticleController::class, 'update'])->name('articles.update'); // Usa {id}
-Route::delete('/articles/{id}', [ArticleController::class, 'destroy'])->name('articles.destroy');
+Route::get('/articles/{article}', [ArticleController::class, 'show'])->name('articles.show');
+Route::get('/articles/{article}/edit', [ArticleController::class, 'edit'])->name('articles.edit');
+Route::put('/articles/{article}', [ArticleController::class, 'update'])->name('articles.update');
+Route::delete('/articles/{article}', [ArticleController::class, 'destroy'])->name('articles.destroy');
+
 
 //Rutas para entradas
 Route::get('/entries', [EntryController::class, 'index'])->name('entries.index');
@@ -63,12 +76,12 @@ Route::put('/entries/{id}', [EntryController::class, 'update'])->name('entries.u
 Route::delete('/entries/{id}', [EntryController::class, 'destroy'])->name('entries.destroy');
 
 //Rutas para detalles entradas
-Route::get('/detail_entries', [DetailEntryController::class, 'index'])->name('detail_entries.index');
-Route::get('/detail_entries/create', [DetailEntryController::class, 'create'])->name('detail_entries.create');
-Route::post('/detail_entries', [DetailEntryController::class, 'store'])->name('detail_entries.store');
-Route::get('/detail_entries/{id}', [DetailEntryController::class, 'show'])->name('detail_entries.show');
-Route::get('/detail_entries/{id}/edit', [DetailEntryController::class, 'edit'])->name('detail_entries.edit');
-Route::put('/detail_entries/{id}', [DetailEntryController::class, 'update'])->name('detail_entries.update');
-Route::delete('/detail_entries/{id}', [DetailEntryController::class, 'destroy'])->name('detail_entries.destroy');
+Route::get('/detailEntries', [DetailEntryController::class, 'index'])->name('detailEntries.index');
+Route::get('/detailEntries/create', [DetailEntryController::class, 'create'])->name('detailEntries.create');
+Route::post('/detailEntries', [DetailEntryController::class, 'store'])->name('detailEntries.store');
+Route::get('/detailEntries/{id}', [DetailEntryController::class, 'show'])->name('detailEntries.show');
+Route::get('/detailEntries/{id}/edit', [DetailEntryController::class, 'edit'])->name('detailEntries.edit');
+Route::put('/detailEntries/{id}', [DetailEntryController::class, 'update'])->name('detailEntries.update');
+Route::delete('/detailEntries/{id}', [DetailEntryController::class, 'destroy'])->name('detailEntries.destroy');
 
-//Rutas para
+

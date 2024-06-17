@@ -50,7 +50,8 @@
         <input type="file" class="form-control-file" id="image" name="image">
     </div>
     <div class="form-group form-check">
-        <input type="checkbox" class="form-check-input" id="status" name="status">
+        <input type="hidden" name="status" value="0">
+        <input type="checkbox" class="form-check-input" id="status" name="status" value="1">
         <label class="form-check-label" for="status">Activo</label>
     </div>
     <button type="submit" class="btn btn-primary">Guardar</button>
