@@ -3,47 +3,70 @@
 namespace App\Http\Controllers;
 
 use App\Models\DetailSale;
+use App\Models\Sale;
+use App\Models\Article;
 use Illuminate\Http\Request;
 
 class DetailSaleController extends Controller
 {
     public function index()
     {
-        $DetailSales = DetailSale::all();
-        return view('detail-sales.index', ['DetailSales'=> $DetailSales]);
+        $detailSales = DetailSale::all();
+        return view('detail-sales.index', compact('detailSales'));
     }
 
     public function create()
     {
-        return view('detail-sales.create');
+        $sales = Sale::all();
+        $articles = Article::all();
+        return view('detail-sales.create', compact('sales', 'articles'));
     }
 
     public function store(Request $request)
     {
-        $DetailSale = new DetailSale($request->all());
-        $DetailSale->save();
+        $request->validate([
+            'sale_id' => 'required|exists:sales,id',
+            'article_id' => 'required|exists:articles,id',
+            'quantity' => 'required|numeric',
+            'price' => 'required|numeric',
+            'discount' => 'required|numeric',
+        ]);
+
+        DetailSale::create($request->all());
+
         return redirect()->route('detail-sales.index');
     }
 
-    public function show(DetailSale $DetailSale)
+    public function show(DetailSale $detailSale)
     {
-        return view('detail-sales.show', ['DetailSale'=> $DetailSale]);
+        return view('detail-sales.show', compact('detailSale'));
     }
 
-    public function edit(DetailSale $DetailSale)
+    public function edit(DetailSale $detailSale)
     {
-        return view('detail-sales.edit', ['DetailSale'=> $DetailSale]);
+        $sales = Sale::all();
+        $articles = Article::all();
+        return view('detail-sales.edit', compact('detailSale', 'sales', 'articles'));
     }
 
-    public function update(Request $request, DetailSale $DetailSale)
+    public function update(Request $request, DetailSale $detailSale)
     {
-        $DetailSale->update($request->all());
+        $request->validate([
+            'sale_id' => 'required|exists:sales,id',
+            'article_id' => 'required|exists:articles,id',
+            'quantity' => 'required|numeric',
+            'price' => 'required|numeric',
+            'discount' => 'required|numeric',
+        ]);
+
+        $detailSale->update($request->all());
+
         return redirect()->route('detail-sales.index');
     }
 
-    public function destroy(DetailSale $DetailSale)
+    public function destroy(DetailSale $detailSale)
     {
-        $DetailSale->delete();
+        $detailSale->delete();
         return redirect()->route('detail-sales.index');
     }
 }

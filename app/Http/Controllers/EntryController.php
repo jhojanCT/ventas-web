@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Entry;
+use App\Models\Person;  // Asegúrate de importar el modelo Person
+use App\Models\User;    // Asegúrate de importar el modelo User
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 
 class EntryController extends Controller
 {
@@ -21,7 +24,9 @@ class EntryController extends Controller
      */
     public function create()
     {
-        return view('entries.create');
+        $suppliers = Person::where('person_type', 'supplier')->get(); // Ajusta esto según tu lógica
+        $users = User::all();
+        return view('entries.create', compact('suppliers', 'users'));
     }
 
     /**
@@ -62,7 +67,13 @@ class EntryController extends Controller
     public function edit($id)
     {
         $entry = Entry::findOrFail($id);
-        return view('entries.edit', ['entry' => $entry]);
+        $suppliers = Person::where('person_type', 'supplier')->get();
+        $users = User::all();
+    
+        // Asegura que `date_time` sea un objeto Carbon
+        $entry->date_time = Carbon::parse($entry->date_time);
+    
+        return view('entries.edit', compact('entry', 'suppliers', 'users'));
     }
 
     /**

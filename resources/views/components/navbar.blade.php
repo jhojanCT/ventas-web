@@ -31,6 +31,12 @@
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('detailEntries.index') }}">Detalles Entradas</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('reports.sales.index') }}">  Reporte Ventas</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('reports.entries.index') }}">  Reporte Entradas</a>
+                </li>
 
 
             </ul>

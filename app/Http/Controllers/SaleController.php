@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\Sale;
+use App\Models\Person;
+use App\Models\User;
+use Illuminate\Http\Request;
 
 class SaleController extends Controller
 {
-    //
     public function index()
     {
         $sales = Sale::all();
@@ -16,29 +17,53 @@ class SaleController extends Controller
 
     public function create()
     {
-        return view('sales.create');
+        $persons = Person::all();
+        $users = User::all();
+        return view('sales.create', compact('persons', 'users'));
     }
 
     public function store(Request $request)
     {
-        $sale = new Sale($request->all());
-        $sale->save();
-        return redirect()->route('sales.index');
-    }
+        $request->validate([
+            'client_id' => 'required|exists:persons,id',
+            'user_id' => 'required|exists:users,id',
+            'voucher_type' => 'required|string|max:255',
+            'voucher_series' => 'nullable|string|max:255',
+            'voucher_number' => 'required|string|max:255',
+            'date_time' => 'required|date',
+            'tax' => 'required|numeric',
+            'total' => 'required|numeric',
+            'status' => 'required|string|max:255',
+        ]);
 
-    public function show(Sale $sale)
-    {
-        return view('sales.show', compact('sale'));
+        Sale::create($request->all());
+
+        return redirect()->route('sales.index');
     }
 
     public function edit(Sale $sale)
     {
-        return view('sales.edit', compact('sale'));
+        $persons = Person::all();
+        $users = User::all();
+        return view('sales.edit', compact('sale', 'persons', 'users'));
     }
 
     public function update(Request $request, Sale $sale)
     {
+        $request->validate([
+            'client_id' => 'required|exists:persons,id',
+            'user_id' => 'required|exists:users,id',
+            'voucher_type' => 'required|string|max:255',
+            'voucher_series' => 'nullable|string|max:255',
+            'voucher_number' => 'required|string|max:255',
+            'date_time' => 'required|date',
+            'tax' => 'required|numeric',
+            'total' => 'required|numeric',
+            'status' => 'required|string|max:255',
+        ]);
+
         $sale->update($request->all());
+
         return redirect()->route('sales.index');
     }
 

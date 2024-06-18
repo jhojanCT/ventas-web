@@ -8,6 +8,8 @@ use App\Http\Controllers\SaleController;
 use App\Http\Controllers\DetailSaleController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\Reports\SalesReportController;
+use App\Http\Controllers\Reports\EntryReportController;
 
 
 
@@ -83,5 +85,13 @@ Route::get('/detailEntries/{id}', [DetailEntryController::class, 'show'])->name(
 Route::get('/detailEntries/{id}/edit', [DetailEntryController::class, 'edit'])->name('detailEntries.edit');
 Route::put('/detailEntries/{id}', [DetailEntryController::class, 'update'])->name('detailEntries.update');
 Route::delete('/detailEntries/{id}', [DetailEntryController::class, 'destroy'])->name('detailEntries.destroy');
+
+//Rutas para Reportes vesntas
+Route::get('reports/sales', [SalesReportController::class, 'index'])->name('reports.sales.index');
+Route::get('reports/sales/pdf', [SalesReportController::class, 'report'])->name('reports.sales.pdf');
+
+//Rutas para Reportes entradas
+Route::get('reports/entries', [EntryReportController::class, 'index'])->name('reports.entries.index');
+Route::get('reports/entries/pdf', [EntryReportController::class, 'report'])->name('reports.entries.pdf');
 
 

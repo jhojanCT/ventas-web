@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Article;
-use App\Models\Category; // Asegúrate de importar el modelo Category si aún no lo has hecho
+use App\Models\Category; 
 
 class ArticleController extends Controller
 {
@@ -16,7 +16,7 @@ class ArticleController extends Controller
 
     public function create()
     {
-        $categories = Category::all(); // Obtener todas las categorías para el formulario de creación
+        $categories = Category::all();
         return view('articles.create', compact('categories'));
     }
 
@@ -53,12 +53,12 @@ class ArticleController extends Controller
 
     public function edit($id)
     {
-        $categories = Category::all(); // Obtener todas las categorías para el formulario de edición
+        $categories = Category::all(); 
         $article = Article::find($id);
         return view('articles.edit', compact('article', 'categories'));
     }
 
-    public function update(Request $request, string $id)
+    public function update(Request $request, $id)
     {
         $validatedData = $request->validate([
             'category_id' => 'required|exists:categories,id',
@@ -70,20 +70,32 @@ class ArticleController extends Controller
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             'status' => 'required|boolean',
         ]);
+    
 
-        // Procesar carga de imagen si se proporciona
+        $article = Article::findOrFail($id);
+    
+
+        $article->category_id = $request->category_id;
+        $article->code = $request->code;
+        $article->name = $request->name;
+        $article->sale_price = $request->sale_price;
+        $article->stock = $request->stock;
+        $article->description = $request->description;
+        $article->status = $request->has('status') ? 1 : 0;
+    
+
         if ($request->hasFile('image')) {
             $image = $request->file('image');
             $imageName = time() . '.' . $image->getClientOriginalExtension();
             $image->move(public_path('images/articles'), $imageName);
-            $validatedData['image'] = $imageName;
+            $article->image = $imageName;
         }
 
-        $article = Article::find($id);
-        $article->save($request->all());
-
-        return redirect()->route('articles.index');
+        $article->save();
+    
+        return redirect()->route('articles.index')->with('');
     }
+    
 
     public function destroy(Article $article)
     {

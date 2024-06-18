@@ -18,24 +18,50 @@
 <form action="{{ route('sales.store') }}" method="POST">
     @csrf
     <div class="form-group">
-        <label for="customer_name">Nombre del Cliente</label>
-        <input type="text" class="form-control" id="customer_name" name="customer_name" required>
+        <label for="client_id">Cliente</label>
+        <select class="form-control" id="client_id" name="client_id" required>
+            <option value="">Seleccione un Cliente</option>
+            @foreach($persons as $person)
+                <option value="{{ $person->id }}">{{ $person->name }}</option>
+            @endforeach
+        </select>
     </div>
     <div class="form-group">
-        <label for="product_name">Nombre del Producto</label>
-        <input type="text" class="form-control" id="product_name" name="product_name" required>
+        <label for="user_id">Usuario</label>
+        <select class="form-control" id="user_id" name="user_id" required>
+            <option value="">Seleccione un Usuario</option>
+            @foreach($users as $user)
+                <option value="{{ $user->id }}">{{ $user->name }}</option>
+            @endforeach
+        </select>
     </div>
     <div class="form-group">
-        <label for="quantity">Cantidad</label>
-        <input type="number" class="form-control" id="quantity" name="quantity" required>
+        <label for="voucher_type">Tipo de Comprobante</label>
+        <input type="text" class="form-control" id="voucher_type" name="voucher_type" required>
     </div>
     <div class="form-group">
-        <label for="amount">Monto</label>
-        <input type="number" step="0.01" class="form-control" id="amount" name="amount" required>
+        <label for="voucher_series">Serie de Comprobante</label>
+        <input type="text" class="form-control" id="voucher_series" name="voucher_series">
     </div>
     <div class="form-group">
-        <label for="sale_date">Fecha de Venta</label>
-        <input type="date" class="form-control" id="sale_date" name="sale_date" required>
+        <label for="voucher_number">Número de Comprobante</label>
+        <input type="text" class="form-control" id="voucher_number" name="voucher_number" required>
+    </div>
+    <div class="form-group">
+        <label for="date_time">Fecha y Hora</label>
+        <input type="datetime-local" class="form-control" id="date_time" name="date_time" required>
+    </div>
+    <div class="form-group">
+        <label for="tax">Impuesto</label>
+        <input type="number" step="0.01" class="form-control" id="tax" name="tax" required>
+    </div>
+    <div class="form-group">
+        <label for="total">Total</label>
+        <input type="number" step="0.01" class="form-control" id="total" name="total" required>
+    </div>
+    <div class="form-group">
+        <label for="status">Estado</label>
+        <input type="text" class="form-control" id="status" name="status" required>
     </div>
     <button type="submit" class="btn btn-primary">Guardar</button>
 </form>

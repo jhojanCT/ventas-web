@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\DetailEntry;
+use App\Models\Entry;
+use App\Models\Article;
 use Illuminate\Http\Request;
 
 class DetailEntryController extends Controller
@@ -13,9 +15,7 @@ class DetailEntryController extends Controller
     public function index()
     {
         $detailEntries = DetailEntry::all();
-        return view('detailEntries.index', [
-            'detailEntries' => $detailEntries,
-        ]);
+        return view('detailEntries.index', compact('detailEntries'));
     }
 
     /**
@@ -23,7 +23,10 @@ class DetailEntryController extends Controller
      */
     public function create()
     {
-        return view('detailEntries.create');
+        $entries = Entry::all();
+        $articles = Article::all();
+
+        return view('detailEntries.create', compact('entries', 'articles'));
     }
 
     /**
@@ -50,9 +53,7 @@ class DetailEntryController extends Controller
     public function show(string $id)
     {
         $detailEntry = DetailEntry::findOrFail($id);
-        return view('detailEntries.show', [
-            'detailEntry' => $detailEntry,
-        ]);
+        return view('detailEntries.show', compact('detailEntry'));
     }
 
     /**
@@ -61,9 +62,10 @@ class DetailEntryController extends Controller
     public function edit(string $id)
     {
         $detailEntry = DetailEntry::findOrFail($id);
-        return view('detailEntries.edit', [
-            'detailEntry' => $detailEntry,
-        ]);
+        $entries = Entry::all();
+        $articles = Article::all();
+
+        return view('detailEntries.edit', compact('detailEntry', 'entries', 'articles'));
     }
 
     /**
