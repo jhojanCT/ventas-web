@@ -19,6 +19,7 @@
         <tr>
             <th>ID</th>
             <th>Nombre</th>
+            <th>Nombre</th>
             <th>Categoría</th>
             <th>Precio</th>
             <th>Stock</th>
@@ -31,11 +32,13 @@
             <tr>
                 <td>{{ $article->id }}</td>
                 <td>{{ $article->name }}</td>
+                
                 <td>{{ $article->category ? $article->category->name : 'Sin Categoría' }}</td>
                 <td>{{ $article->sale_price }}</td>
                 <td>{{ $article->stock }}</td>
                 <td>{{ $article->status }}</td>
                 <td>
+                    <a href="{{ route('articles.show', $article->id) }}" class="btn btn-info btn-sm">Ver</a>
                     <a href="{{ route('articles.edit', $article->id) }}" class="btn btn-warning btn-sm">Editar</a>
                     <form action="{{ route('articles.destroy', $article->id) }}" method="POST" style="display:inline-block;">
                         @csrf

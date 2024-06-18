@@ -49,7 +49,9 @@
     </div>
     <div class="form-group">
         <label for="image">Imagen</label>
-        <input type="file" class="form-control-file" id="image" name="image">
+
+        <div id="image-preview"></div>
+        <input type="file" id="image" name="image">
     </div>
     <div class="form-group">
         <label for="status">Estado</label>
@@ -61,4 +63,40 @@
 
     <button type="submit" class="btn btn-primary">Guardar</button>
 </form>
+
+<script>
+    // Espera hasta que el DOM esté completamente cargado
+    document.addEventListener('DOMContentLoaded', function () {
+        // Obtener el input y el div de vista previa
+        var imageInput = document.getElementById('image');
+        var imagePreview = document.getElementById('image-preview');
+
+        // Escuchar el evento change en el input
+        imageInput.addEventListener('change', function () {
+            // Comprobar si hay un archivo seleccionado
+            if (this.files && this.files[0]) {
+                // Crear un objeto FileReader
+                var reader = new FileReader();
+
+                // Definir la función a ejecutar una vez que se haya leído el archivo
+                reader.onload = function (e) {
+                    // Crear una etiqueta img y establecer su src al resultado de la lectura
+                    var imgElement = document.createElement('img');
+                    imgElement.src = e.target.result;
+                    imgElement.alt = 'Vista Previa de Imagen';
+                    imgElement.width = 300; // Establecer el ancho de la imagen
+                    imgElement.height = 300; // Establecer la altura de la imagen
+
+                    // Limpiar el div de vista previa y agregar la imagen
+                    imagePreview.innerHTML = '';
+                    imagePreview.appendChild(imgElement);
+                }
+
+                // Leer el archivo como una URL de datos
+                reader.readAsDataURL(this.files[0]);
+            }
+        });
+    });
+</script>
+
 @endsection

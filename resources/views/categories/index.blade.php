@@ -3,8 +3,22 @@
 @section('content')
 <div class="container">
     <h1>Categories</h1>
+    
+    
 
-    <a href="{{ route('categories.create') }}" class="btn btn-primary mb-3">Nueva Categoria</a>
+
+    <a href="{{ route('categories.create') }}" class="btn btn-primary mb-3">Nueva Categoria</a> @if(session('error'))
+    <div class="alert alert-danger">
+        {{ session('error') }}
+    </div>
+@endif
+
+@if (session('success'))
+   
+    <div class="alert alert-success">
+        {{ session('success') }}
+    </div>
+@endif
 
     <table class="table">
         <thead>
@@ -30,6 +44,13 @@
                         @method('DELETE')
                         <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('¿Estás seguro de que deseas eliminar esta categoría?')">Eliminar</button>
                     </form>
+                    {{-- {{$ids}} --}}
+                        
+                    @if (session('error') && session('id') == $category->id)
+                    <div class="alert alert-danger">
+                        {{ session('error') }}
+                    </div>
+                @endif
                 </td>
             </tr>
             @empty

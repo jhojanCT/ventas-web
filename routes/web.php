@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ArticleController;
+use App\Http\Controllers\CategoryArticleController;
 use App\Http\Controllers\CategoryController;
 
 use App\Models\Article;
@@ -9,6 +10,7 @@ use GuzzleHttp\Promise\Create;
 use App\Http\Controllers\DetailEntryController;
 use App\Http\Controllers\DetailSaleController;
 use App\Http\Controllers\EntryController;
+use App\Http\Controllers\Reports\CategoryArticleController as ReportsCategoryArticleController;
 use App\Http\Controllers\SaleController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
@@ -120,4 +122,9 @@ Route::delete('/detail_entries/{id}', [DetailEntryController::class, 'destroy'])
 //Rutas para reportes
 // Route::get('reports/categories', [CategoryController::class, 'reporteCategoriaProductos'])->name('reports.categories.index');
 // Route::get('/reports/categories', [CategoryController::class, 'index'])->name('categories.index');
-Route::get('/reports/categories', [CategoryController::class, 'reporteCategoriaProductos'])->name('reports.categories.index');
+Route::get('/reports/categories', [ReportsCategoryArticleController::class, 'reporteCategoriaProductos'])->name('reports.categories.index');
+
+
+Route::get('/reports/categories/pdf', [ReportsCategoryArticleController::class, 'generatePdf'])->name('reports.categories.pdf');
+Route::get('/reports/categories/vistaPdf', [ReportsCategoryArticleController::class, 'vistaPdf'])->name('reports.categories.vistaPdf');
+

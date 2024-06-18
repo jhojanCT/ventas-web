@@ -53,10 +53,22 @@
         <label for="description">Descripción</label>
         <textarea class="form-control" id="description" name="description">{{ old('description', $article->description) }}</textarea>
     </div>
-    <div class="form-group">
+
+
+
+    <div class="form-group" id="image-preview-container">
         <label for="image">Imagen</label>
-        <input type="file" class="form-control-file" id="image" name="image">
+        
+        <div id="image-preview">
+            @if ($article->image)
+                <img src="{{ asset('images/articles/' . $article->image) }}" alt="Imagen del artículo" style="width: 180px; height: 180px;" class="img-responsive-edit">
+            @endif
+        </div>
+        
+        <input type="file" class="form-control-file" id="image" name="image" onchange="previewImage(event)">
     </div>
+
+
     <div class="form-group">
         <label for="status">Estado</label>
         <select class="form-control" id="status" name="status">
@@ -67,4 +79,26 @@
 
     <button type="submit" class="btn btn-primary">Guardar cambios</button>
 </form>
+
+
+<script>
+    function previewImage(event) {
+        const input = event.target;
+        const previewContainer = document.getElementById('image-preview');
+        previewContainer.innerHTML = ''; // Clear previous previews
+    
+        if (input.files && input.files[0]) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const img = document.createElement('img');
+                img.src = e.target.result;
+                img.style.width = '180px';
+                img.style.height = '180px';
+                img.classList.add('img-responsive-edit');
+                previewContainer.appendChild(img);
+            }
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+    </script>
 @endsection

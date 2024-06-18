@@ -177,3 +177,24 @@ footer {
     bottom: 0;
     width: 100%;
 }
+
+
+.article-container {
+    display: flex;
+    justify-content: space-between;
+}
+.article-details {
+    flex: 1;
+}
+.article-image {
+    flex: 1;
+    text-align: right;
+}
+.img-responsive {
+    max-width: 100%;
+    height: auto;
+}
+.article-edit-btn {
+    display: block;
+    margin-top: 20px;
+}

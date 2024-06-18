@@ -41,15 +41,21 @@ class ArticleController extends Controller
             $image->move(public_path('images/articles'), $imageName);
             $validatedData['image'] = $imageName;
         }
+        
+        
 
         Article::create($validatedData);
 
         return redirect()->route('articles.index');
     }
 
-    public function show(Article $article)
+    public function show(string $id)
     {
-        return view('articles.show', compact('article'));
+       
+            $article = Article::find($id);
+            return view('articles.show', ['article' => $article]);
+        
+        // return view('articles.show', compact('article'));
     }
 
     public function edit($id)
@@ -86,9 +92,12 @@ class ArticleController extends Controller
         return redirect()->route('articles.index');
     }
 
-    public function destroy(Article $article)
+    public function destroy(string $id)
     {
+        $article = Article::find($id);
         $article->delete();
-        return redirect()->route('articles.index');
+
+        return redirect()->route('articles.index')
+                         ->with('success', 'usuario borrado');
     }
 }
