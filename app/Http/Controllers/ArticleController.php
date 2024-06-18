@@ -33,7 +33,6 @@ class ArticleController extends Controller
             'status' => 'required|boolean',
         ]);
 
-        // Procesar carga de imagen si se proporciona
         if ($request->hasFile('image')) {
             $image = $request->file('image');
             $imageName = time() . '.' . $image->getClientOriginalExtension();
